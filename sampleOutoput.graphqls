@@ -1,0 +1,12 @@
+type Employee {
+        id: ID
+        firstName: String
+        lastName: String
+        salary: Int
+    }
+type Department {
+        id: ID
+        deptName: String
+        location: String
+        type: Int
+    }

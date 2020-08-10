@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.krypted.entity">
+    <class name="Student" table="student">
+        <id name="studentId" column="ID">
+            <generator class="native" />
+        </id>
+        <property name="firstName" column="FNAME" />
+        <property name="lastName" column="LNAME" />
+
+        <many-to-one name="department" class="com.krypted.entity.Department" fetch="select">
+            <column name="DEPT_ID" not-null="true" />
+        </many-to-one>
+    </class>
+    <class name="Department" table="department">
+        <id name="depId" column="DEPT_ID">
+            <generator class="native" />
+        </id>
+        <property name="depName" column="DEP_NAME" />
+        <set name="students" table="student" inverse="true" cascade="save-update" lazy="true" fetch="select">
+            <key>
+                <column name="DEPT_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.krypted.entity.Student" />
+        </set>
+    </class>
+</hibernate-mapping>
